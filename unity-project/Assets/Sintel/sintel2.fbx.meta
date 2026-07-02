@@ -8,7 +8,8 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Sintel_Skin1_layer
-    second: {fileID: 2100000, guid: 3f7647087ede0a746a6a75757658b63c, type: 2}
+    second: {fileID: -876546973899608171, guid: a41d7fb82672fb840b39b4320f14f94b,
+      type: 3}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -18,13 +19,28 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: eyelash
-    second: {fileID: -876546973899608171, guid: cd2273f7172c5534fad5f0dc0b2ba35c,
+    second: {fileID: -876546973899608171, guid: a41d7fb82672fb840b39b4320f14f94b,
       type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: grey_edges
+    second: {fileID: 2100000, guid: 06830320f00d9b54e8a975870c7d41a6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: inside_mouth
     second: {fileID: 2100000, guid: 643f562d27ec34945be1bb2b2c5722f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: leatherBoots
+    second: {fileID: 2100000, guid: c017798d1fea7fc42b013d89b0d748fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: leatherPants
+    second: {fileID: 2100000, guid: c1a1d8fb6fefc524c98157cf8fa49e5a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -38,6 +54,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: sweater_main
+    second: {fileID: 2100000, guid: bb9ee0341e764b04fa8d324cad2856f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sweater_straps
+    second: {fileID: 2100000, guid: 65a7b258a49a2e5488b5ec536cefc409, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: teeth
     second: {fileID: 2100000, guid: a80c1ff73860e88498e3003f26f63410, type: 2}
   - first:
@@ -47,7 +73,7 @@ ModelImporter:
     second: {fileID: 2100000, guid: b67e279b91f38ea44887e632837e189c, type: 2}
   materials:
     materialImportMode: 2
-    materialName: 0
+    materialName: 1
     materialSearch: 1
     materialLocation: 1
   animations:
@@ -64,7 +90,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    importConstraints: 0
+    importConstraints: 1
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5

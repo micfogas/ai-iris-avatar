@@ -17,7 +17,6 @@ public class PlayVfxMessage : MessageBase
   public string vfx;
 }
 
-
 public class WebSocketMsgHandler : MonoBehaviour
 {
 
@@ -32,7 +31,7 @@ public class WebSocketMsgHandler : MonoBehaviour
   public void OnMessage(string msg)
   {
     var msgWithType = JsonUtility.FromJson<MessageBase>(msg);
-    if (msgWithType == null)
+    if (msgWithType == null || string.IsNullOrEmpty(msgWithType.type))
     {
       Debug.LogError($"WebSocket message does not contain 'type' field: '{msg}'");
       return;
@@ -48,7 +47,7 @@ public class WebSocketMsgHandler : MonoBehaviour
         }
       default:
         {
-          Debug.LogError($"WebSocket message contains  unknown 'type' field: '{type}'");
+          Debug.LogError($"WebSocket message contains unknown 'type' field: '{type}'");
           break;
         }
     }
@@ -60,9 +59,14 @@ public class WebSocketMsgHandler : MonoBehaviour
     var vfxName = vfxMsg.vfx;
     Debug.Log($"Playing vfx: '{vfxName}'");
 
+    // FIX: Execute Play() on the intended system without destroying ambient/background effects
     foreach (var x in particleSystems)
     {
-      x.gameObject.SetActive(x.name == vfxName);
+      if (x.name == vfxName)
+      {
+        x.gameObject.SetActive(true);
+        x.Play(); 
+      }
     }
   }
 }
