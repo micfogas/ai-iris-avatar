@@ -12,3 +12,9 @@ _references
 voice_to_clone.wav
 out_speak_result.wav
 out_speaker_samples
+
+# stuff
+OllaClientBehavior.cs
+WebSocketClientBehavior.cs
+unity-project/Temp/
+unity-project/.vscode/

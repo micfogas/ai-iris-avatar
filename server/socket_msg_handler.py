@@ -1,11 +1,8 @@
 import traceback
 from aiohttp import web
-
 from termcolor import colored
 from typing import Any
-
 from server.app_logic import AppLogic
-
 
 class SocketMsgHandler:
     def __init__(
@@ -19,31 +16,29 @@ class SocketMsgHandler:
         self.is_unity = is_unity
 
         if self.is_unity:
-            # app_logic.on_text_response.append(self.on_text_response)
-            app_logic.on_tts_response.append(self.on_tts_response)
-            app_logic.on_play_vfx.append(self.on_play_vfx)
+            self.app_logic.on_tts_response.append(self.on_tts_response)
+            self.app_logic.on_play_vfx.append(self.on_play_vfx)
         else:
-            # web browser
-            app_logic.on_query.append(self.on_query)
-            app_logic.on_text_response.append(self.on_text_response)
-            app_logic.on_tts_timings.append(self.on_tts_timinigs)
-            app_logic.on_tts_first_chunk.append(self.on_tts_first_chunk)
+            self.app_logic.on_query.append(self.on_query)
+            self.app_logic.on_text_response.append(self.on_text_response)
+            self.app_logic.on_tts_timings.append(self.on_tts_timings)
+            self.app_logic.on_tts_first_chunk.append(self.on_tts_first_chunk)
 
     def on_disconnect(self):
         self.app_logic.on_query.safe_remove(self.on_query)
         self.app_logic.on_text_response.safe_remove(self.on_text_response)
         self.app_logic.on_tts_response.safe_remove(self.on_tts_response)
-        self.app_logic.on_tts_timings.safe_remove(self.on_tts_timinigs)
+        self.app_logic.on_tts_timings.safe_remove(self.on_tts_timings)
         self.app_logic.on_tts_first_chunk.safe_remove(self.on_tts_first_chunk)
         self.app_logic.on_play_vfx.safe_remove(self.on_play_vfx)
 
     async def __call__(self, msg):
-        # print(msg)
         type = msg.get("type", "")
+        # FIX: Ensure msg_id is always in scope before the try block executes
+        msg_id = msg.get("msgId", "")
 
         try:
             if type == "query":
-                msg_id = msg.get("msgId", "")
                 text = msg.get("text", "")
                 await self.app_logic.ask_query(text, msg_id)
             elif type == "play-vfx":
@@ -85,7 +80,6 @@ class SocketMsgHandler:
         await self.ws_send_json(data)
 
     async def on_tts_response(self, bytes):
-        # print("on_tts_response()")
         await self.ws_send_bytes(bytes)
 
     async def on_tts_first_chunk(self, msg_id: str, elapsed_tts: float):
@@ -96,7 +90,7 @@ class SocketMsgHandler:
         }
         await self.ws_send_json(data)
 
-    async def on_tts_timinigs(self, msg_id: str, elapsed_tts: float):
+    async def on_tts_timings(self, msg_id: str, elapsed_tts: float):
         data = {
             "type": "tts-elapsed",
             "msgId": msg_id,
